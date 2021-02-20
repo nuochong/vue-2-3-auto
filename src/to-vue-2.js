@@ -214,7 +214,6 @@ const handleSpecialLifeCycle = function (component) {
 		}
 	}
 
-	console.log('component.beforeCreate', component.beforeCreate);
 	const beforeCreate = component.beforeCreate;
 	const beforeDestroy = component.beforeDestroy;
 	const beforeCreateResult = beforeCreate ? beforeCreate[1] : () => {};
