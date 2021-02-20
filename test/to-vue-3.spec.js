@@ -1,4 +1,4 @@
-const {default: toVue3} = require('vue-2-3/to-vue-3');
+const {default: toVue3} = require('vue-2-3-auto/to-vue-3');
 const Vue3 = require('vue3');
 const outdent = require('outdent');
 const Vue = require('vue');

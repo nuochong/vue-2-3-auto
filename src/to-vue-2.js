@@ -192,7 +192,7 @@ const toVue2 = vue3Component => {
 	}
 
 	const vue2Wrapper = Object.create(vue2WrapperBase);
-	vue2Wrapper.component = vue3Component;
+	vue2Wrapper.component = handleSpecialLifeCycle(vue3Component);
 	return vue2Wrapper;
 };
 
@@ -205,6 +205,23 @@ toVue2.register = function () {
 			Vue3 = Vue;
 		}
 	}
+};
+
+const handleSpecialLifeCycle = function (component) {
+	if (component && Object.keys(component).length > 0) {
+		for (const item in component.components) {
+			component.components[item] = handleSpecialLifeCycle(component.components[item]);
+		}
+	}
+
+	console.log('component.beforeCreate', component.beforeCreate);
+	const beforeCreate = component.beforeCreate;
+	const beforeDestroy = component.beforeDestroy;
+	const beforeCreateResult = beforeCreate ? beforeCreate[1] : () => {};
+	const beforeDestroyResult = beforeDestroy ? beforeDestroy[1] : () => {};
+	component.beforeCreate = beforeCreateResult ? beforeCreateResult : () => {};
+	component.beforeDestroy = beforeDestroyResult ? beforeDestroyResult : () => {};
+	return component;
 };
 
 export default toVue2;

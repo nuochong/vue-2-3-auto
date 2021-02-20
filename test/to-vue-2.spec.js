@@ -1,4 +1,4 @@
-const {default: toVue2} = require('vue-2-3/to-vue-2');
+const {default: toVue2} = require('vue-2-3-auto/to-vue-2');
 const Vue = require('vue');
 const Vue3 = require('vue3');
 const {mount} = require('@vue/test-utils');
